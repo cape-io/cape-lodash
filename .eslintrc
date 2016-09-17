@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "shared-node-browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "array-bracket-spacing": [ 2, "always" ],
+    "comma-dangle": [2, "always-multiline"],
+    "id-length": [2, {
+      "min": 3,
+      "max": 30,
+      "properties": "never",
+      "exceptions": ["t", "io", "id"]
+    }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["test/**.js"]}],
+    "import/no-named-as-default": 2,
+    "import/default": 0,
+    "no-console": 1,
+    "no-alert": 1,
+    "no-trailing-spaces": 2,
+    "object-curly-spacing": [ 2, "always" ],
+    "semi": [ 2, "never" ]
+  },
+  "plugins": [
+    "import"
+  ],
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": ["node_modules", "src"]
+    }
+  }
+}

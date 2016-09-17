@@ -1,7 +1,7 @@
 {
   "name": "cape-lodash",
   "version": "1.0.0",
-  "description": "A few reselect inspired helper utility/selector functions.",
+  "description": "A few lodash/fp inspired helper utility functions.",
   "main": "lib/index.js",
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
   "repository": "cape-io/cape-lodash",

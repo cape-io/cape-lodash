@@ -1,9 +1,10 @@
 import {
-  cond, curry, defaultTo, eq, find, flow, flowRight, get, identical, isEmpty, isObject,
+  cond, curry, defaultTo, eq, find, flow, flowRight, get, identical, identity, isEmpty, isObject,
   negate, nthArg, over, partial, property, spread, stubTrue,
 } from 'lodash'
 import fpDefaultTo from 'lodash/fp/defaultTo'
 
+export const condId = [ stubTrue, identity ]
 export const createObj = curry((key, val) => ({ [key]: val }))
 
 // Returns true if sent a value that is exactly false.

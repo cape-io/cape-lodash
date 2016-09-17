@@ -1,9 +1,10 @@
-# cape-lodash v1.0.0
+# cape-lodash v1.1.1
 
 A few `lodash/fp` inspired utility functions.
 
 Please view source for explanation and tests for usage.
 
+- `condId` - array. [ stubTrue, identity ]
 - `createObj(key, value)` - curried. creates a new object with one key/val.
 - `isFalse()` - Returns true if sent a value that is exactly false.
 - `isTrue()` - Returns true if sent a value that is exactly true.

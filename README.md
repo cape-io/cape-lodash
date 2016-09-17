@@ -1,4 +1,4 @@
-# cape-lodash v1.2.0
+# cape-lodash v1.2.1
 
 A few `lodash/fp` inspired utility functions.
 
@@ -14,4 +14,6 @@ Please view source for explanation and tests for usage.
 - `function handleChanges(getValue, onChange)` - Give it a getter and an onChange callback. It will return a function. Call returned function on every change and it will conditionally calling onChange when it finds a change.
 - `getDefault('path.one', 'second.path')` - Given two paths, select the first one that is defined.
 - `transformProp(transformer, path)` - curried. Creates a function that returns transformation of object property at path.
-- `hasMethodAt(path)` Returns function that evaluates if passed object has a function at path.
+- `transformPropOf(transformer, object)` - curried. Same as `transformProp` but swap place of object/path.
+- `hasMethodAt(path)(object)` Returns function that evaluates if passed object has a function at path.
+- `hasMethodOf(object)(path)` Same as `hasMethodAt` with object/path flip.

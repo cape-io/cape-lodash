@@ -3,7 +3,7 @@ import { isFunction, min, noop } from 'lodash'
 
 import {
   createObj, changeChecker, handleChanges, isFalse, toBool, getDefault, firstValArg,
-  transformProp, hasMethodAt,
+  transformProp, transformPropOf, hasMethodAt, hasMethodOf,
 } from '../src'
 
 test('createObj', (t) => {
@@ -90,8 +90,18 @@ test('transformProp', (t) => {
   t.equal(transformProp(min)('foo')({ foo: [ 4, 2, 8, 6 ] }), 2, 'min')
   t.end()
 })
+test('transformPropOf', (t) => {
+  t.equal(transformPropOf(isFunction, { foo: noop })('foo'), true, 'isFunc')
+  t.equal(transformPropOf(min)({ foo: [ 4, 2, 8, 6 ] })('foo'), 2, 'min')
+  t.end()
+})
 test('hasMethodAt', (t) => {
   t.equal(hasMethodAt('foo')({ foo: noop }), true, 'basic t')
   t.equal(hasMethodAt('bar')({ foo: noop }), false, 'basic f')
+  t.end()
+})
+test('hasMethodOf', (t) => {
+  t.equal(hasMethodOf({ foo: noop })('foo'), true, 'basic t')
+  t.equal(hasMethodOf({ foo: noop })('bar'), false, 'basic f')
   t.end()
 })

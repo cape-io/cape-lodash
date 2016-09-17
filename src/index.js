@@ -1,6 +1,6 @@
 import {
   cond, curry, defaultTo, eq, find, flow, identical, identity, isEmpty, isFunction, isObject,
-  negate, over, partialRight, property, spread, stubTrue,
+  negate, over, partialRight, property, propertyOf, spread, stubTrue,
 } from 'lodash'
 
 export const condId = partialRight(cond, [ stubTrue, identity ])
@@ -42,6 +42,9 @@ export function getDefault(path1, path2) {
   )
 }
 // Return result of calling checker with object property.
-export const transformProp = curry((transformer, prop) => flow(property(prop), transformer))
+export const transformProp = curry((transformer, path) => flow(property(path), transformer))
+export const transformPropOf = curry((transformer, object) => flow(propertyOf(object), transformer))
+
 // Check if property has a method at path. hasMethodAt(path)(object)
 export const hasMethodAt = transformProp(isFunction)
+export const hasMethodOf = transformPropOf(isFunction)

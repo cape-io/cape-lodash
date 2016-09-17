@@ -1,6 +1,6 @@
 {
   "name": "cape-lodash",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A few lodash/fp inspired helper utility functions.",
   "main": "lib/index.js",
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",

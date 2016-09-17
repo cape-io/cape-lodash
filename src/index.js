@@ -1,10 +1,9 @@
 import {
-  cond, curry, defaultTo, eq, find, flow, flowRight, get, identical, identity, isEmpty, isObject,
-  negate, nthArg, over, partial, property, spread, stubTrue,
+  cond, curry, defaultTo, eq, find, flow, identical, identity, isEmpty, isFunction, isObject,
+  negate, over, partialRight, property, spread, stubTrue,
 } from 'lodash'
-import fpDefaultTo from 'lodash/fp/defaultTo'
 
-export const condId = [ stubTrue, identity ]
+export const condId = partialRight(cond, [ stubTrue, identity ])
 export const createObj = curry((key, val) => ({ [key]: val }))
 
 // Returns true if sent a value that is exactly false.
@@ -35,9 +34,6 @@ export function handleChanges(getValue, onChange) {
   }
 }
 
-// Select something and turn it into boolean. boolSelector(selector)(state)
-export const boolSelector = partial(flowRight, toBool)
-
 // Given two paths, select the first one that is defined.
 export function getDefault(path1, path2) {
   return flow(
@@ -45,22 +41,7 @@ export function getDefault(path1, path2) {
     spread(defaultTo)
   )
 }
-
-// Returns the 2nd arg.
-export const getProps = nthArg(1)
-
-// Returns the collection property at key as determined by idSelector.
-export function getSelect(collectionSelector, idSelector) {
-  return flow(over([ collectionSelector, idSelector ]), spread(get))
-}
-
-// Send arg to selector then get property at path. Apply defaultValue.
-export function select(selector, path, defaultValue = null) {
-  return flow(selector, property(path), fpDefaultTo(defaultValue))
-}
-
-// See createSelector(). This has no memoization.
-export function simpleSelector(...funcs) {
-  const last = funcs.pop()
-  return flow(over(funcs), spread(last))
-}
+// Return result of calling checker with object property.
+export const transformProp = curry((transformer, prop) => flow(property(prop), transformer))
+// Check if property has a method at path. hasMethodAt(path)(object)
+export const hasMethodAt = transformProp(isFunction)

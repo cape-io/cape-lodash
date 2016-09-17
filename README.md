@@ -1,4 +1,4 @@
-# cape-lodash v1.1.1
+# cape-lodash v1.2.0
 
 A few `lodash/fp` inspired utility functions.
 
@@ -10,6 +10,8 @@ Please view source for explanation and tests for usage.
 - `isTrue()` - Returns true if sent a value that is exactly true.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
 - `toBool({})` - Turn empty objects and arrays to false. Turn other values into a boolean.
-- `changeChecker(initValue)` - Returns func that accepts new val and return true if changed.
+- `changeChecker(initValue)` - Returns function that accepts new val and return true if changed.
 - `function handleChanges(getValue, onChange)` - Give it a getter and an onChange callback. It will return a function. Call returned function on every change and it will conditionally calling onChange when it finds a change.
 - `getDefault('path.one', 'second.path')` - Given two paths, select the first one that is defined.
+- `transformProp(transformer, path)` - curried. Creates a function that returns transformation of object property at path.
+- `hasMethodAt(path)` Returns function that evaluates if passed object has a function at path.

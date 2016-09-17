@@ -1,8 +1,9 @@
 import test from 'tape'
-import { isFunction } from 'lodash'
+import { isFunction, min, noop } from 'lodash'
 
 import {
   createObj, changeChecker, handleChanges, isFalse, toBool, getDefault, firstValArg,
+  transformProp, hasMethodAt,
 } from '../src'
 
 test('createObj', (t) => {
@@ -82,5 +83,15 @@ const props = {
 test('getDefault', (t) => {
   t.equal(getDefault('item.id', 'title')(props), 'bar', 'item.id')
   t.equal(getDefault('item.nothing', 'title')(props), 'strawberry', 'title')
+  t.end()
+})
+test('transformProp', (t) => {
+  t.equal(transformProp(isFunction, 'foo')({ foo: noop }), true, 'isFunc')
+  t.equal(transformProp(min)('foo')({ foo: [ 4, 2, 8, 6 ] }), 2, 'min')
+  t.end()
+})
+test('hasMethodAt', (t) => {
+  t.equal(hasMethodAt('foo')({ foo: noop }), true, 'basic t')
+  t.equal(hasMethodAt('bar')({ foo: noop }), false, 'basic f')
   t.end()
 })

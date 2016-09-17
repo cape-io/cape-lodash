@@ -36,10 +36,7 @@ export function handleChanges(getValue, onChange) {
 
 // Given two paths, select the first one that is defined.
 export function getDefault(path1, path2) {
-  return flow(
-    at([ path1, path2 ]),
-    spread(defaultTo)
-  )
+  return flow(at([ path1, path2 ]), spread(defaultTo))
 }
 // Return result of calling checker with object property.
 export const transformProp = curry((transformer, path) => flow(property(path), transformer))

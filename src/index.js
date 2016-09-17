@@ -2,7 +2,7 @@ import {
   cond, curry, defaultTo, eq, find, flow, identical, identity, isEmpty, isFunction, isObject,
   negate, over, partialRight, property, propertyOf, spread, stubTrue,
 } from 'lodash'
-
+import at from 'lodash/fp/at'
 export const condId = partialRight(cond, [ stubTrue, identity ])
 export const createObj = curry((key, val) => ({ [key]: val }))
 
@@ -37,7 +37,7 @@ export function handleChanges(getValue, onChange) {
 // Given two paths, select the first one that is defined.
 export function getDefault(path1, path2) {
   return flow(
-    over([ property(path1), property(path2) ]),
+    at([ path1, path2 ]),
     spread(defaultTo)
   )
 }

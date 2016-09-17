@@ -1,6 +1,6 @@
 # cape-lodash v1.0.0
 
-A few `lodash/fp` inspired helper utility/selector functions.
+A few `lodash/fp` inspired utility functions.
 
 Please view source for explanation and tests for usage.
 

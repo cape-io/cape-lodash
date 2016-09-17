@@ -2,7 +2,7 @@ import test from 'tape'
 import { isFunction } from 'lodash'
 
 import {
-  createObj, changeChecker, isFalse, toBool, getDefault, firstValArg,
+  createObj, changeChecker, handleChanges, isFalse, toBool, getDefault, firstValArg,
 } from '../src'
 
 test('createObj', (t) => {
@@ -55,6 +55,24 @@ test('changeChecker', (t) => {
   t.true(hasChange('a'))
   t.false(hasChange('a'))
   t.end()
+})
+test('handleChanges', (t) => {
+  t.plan(7)
+  t.ok(isFunction(handleChanges), 'isFunc')
+  let val = null
+  let expecting = false
+  function getValue() { return val }
+  function onChange(newVal) {
+    if (expecting) { t.equal(newVal, expecting) } else { t.fail('unexpected change') }
+    return true
+  }
+  const checker = handleChanges(getValue, onChange)
+  t.false(checker())
+  val = expecting = 'kai'
+  t.true(checker())
+  t.false(checker())
+  val = expecting = 'iak'
+  t.true(checker())
 })
 
 const props = {

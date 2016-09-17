@@ -24,6 +24,15 @@ export function changeChecker(initValue) {
     return !eq(previousValue, currentValue)
   }
 }
+// Give it a getter and an onChange callback. It will return a function.
+// Call returned func on every change and it will conditionally calling onChange.
+export function handleChanges(getValue, onChange) {
+  const valueChanged = changeChecker(getValue())
+  return () => {
+    const val = getValue()
+    return valueChanged(val) && onChange(val)
+  }
+}
 
 // Select something and turn it into boolean. boolSelector(selector)(state)
 export const boolSelector = partial(flowRight, toBool)

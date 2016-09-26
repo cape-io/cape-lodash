@@ -1,8 +1,9 @@
 import {
   cond, curry, defaultTo, eq, find, flow, identical, identity, isEmpty, isFunction, isObject,
-  negate, over, partialRight, property, propertyOf, spread, stubTrue,
+  negate, partialRight, property, propertyOf, spread, stubTrue,
 } from 'lodash'
 import at from 'lodash/fp/at'
+
 export const condId = partialRight(cond, [ stubTrue, identity ])
 export const createObj = curry((key, val) => ({ [key]: val }))
 

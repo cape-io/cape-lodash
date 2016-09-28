@@ -17,3 +17,7 @@ Please view source for explanation and tests for usage.
 - `transformPropOf(transformer, object)` - curried. Same as `transformProp` but swap place of object/path.
 - `hasMethodAt(path)(object)` Returns function that evaluates if passed object has a function at path.
 - `hasMethodOf(object)(path)` Same as `hasMethodAt` with object/path flip.
+- `copy(getKey, setKey, source, target)` - Value of getKey within source is added to target at setKey.
+- `move(getKey, setKey, object)` Place value of getKey path within object to setKey path.
+- `rename(renameObj, source)` - renameObj = { getKey: 'setKey' }
+- `renamePick(renameObj, source)` - Like rename but creates a new objected limited to values of renameObj.

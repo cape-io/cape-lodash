@@ -1,6 +1,7 @@
 import {
-  cond, curry, defaultTo, eq, find, flow, identical, identity, isEmpty, isFunction, isObject,
-  negate, partialRight, property, propertyOf, spread, stubTrue,
+  ary, cond, curry, defaultTo, eq, find, flip, flow, get,
+  identical, identity, isEmpty, isFunction, isObject,
+  negate, partialRight, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
@@ -10,7 +11,7 @@ export const createObj = curry((key, val) => ({ [key]: val }))
 // Returns true if sent a value that is exactly false.
 export const isFalse = identical(false)
 export const isTrue = identical(true)
-// Find the first truthy argument value.
+// Find the first truthy argument value, .
 export const firstValArg = flow(Array, find)
 
 // Turn empty objs and arrays to false. Turn other vals into a boolean.
@@ -46,3 +47,21 @@ export const transformPropOf = curry((transformer, object) => flow(propertyOf(ob
 // Check if property has a method at path. hasMethodAt(path)(object)
 export const hasMethodAt = transformProp(isFunction)
 export const hasMethodOf = transformPropOf(isFunction)
+
+export function copy(getKey, setKey, source, target) {
+  return set(target, setKey, get(source, getKey))
+}
+export const fpCopy = curry(rearg(copy, [ 3, 2, 0, 1 ]), 4)
+export function move(getKey, setKey, object) {
+  set(object, setKey, get(object, getKey))
+  unset(object, getKey)
+  return object
+}
+export const fpMove = curry(ary(flip(move), 3))
+export const rename = curry((renameObj, source) =>
+  reduce(renameObj, fpMove, source)
+)
+// key is get, value is set.
+export const renamePick = curry((renameObj, source) =>
+  reduce(renameObj, fpCopy(source), {})
+)

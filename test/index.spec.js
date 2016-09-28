@@ -2,8 +2,8 @@ import test from 'tape'
 import { isFunction, min, noop } from 'lodash'
 
 import {
-  createObj, changeChecker, handleChanges, isFalse, toBool, getDefault, firstValArg,
-  transformProp, transformPropOf, hasMethodAt, hasMethodOf,
+  createObj, changeChecker, copy, handleChanges, isFalse, move, toBool, getDefault, firstValArg,
+  rename, transformProp, transformPropOf, hasMethodAt, hasMethodOf, renamePick,
 } from '../src'
 
 test('createObj', (t) => {
@@ -103,5 +103,47 @@ test('hasMethodAt', (t) => {
 test('hasMethodOf', (t) => {
   t.equal(hasMethodOf({ foo: noop })('foo'), true, 'basic t')
   t.equal(hasMethodOf({ foo: noop })('bar'), false, 'basic f')
+  t.end()
+})
+test('copy', (t) => {
+  const target = { foo: 'bar' }
+  const source = { cats: 'dogs' }
+  const res = copy('cats', 'usb.dongle', source, target)
+  t.equal(res, target)
+  t.deepEqual(res, { foo: 'bar', usb: { dongle: 'dogs' } })
+  t.end()
+})
+test('move', (t) => {
+  const obj = { one: 'a' }
+  const res = move('one', 'two', obj)
+  t.equal(res, obj)
+  t.deepEqual(res, { two: 'a' })
+  t.end()
+})
+test('rename', (t) => {
+  const obj = { one: 'a', two: 'b' }
+  const res = rename({ one: 'three', two: 'four' }, obj)
+  t.equal(res, obj)
+  t.deepEqual(res, { three: 'a', four: 'b' })
+  t.end()
+})
+test('renamePick', (t) => {
+  t.deepEqual(renamePick({ foo: 'bar' }, { foo: 'cats' }), { bar: 'cats' })
+  const renameObj = {
+    'apple.fest': 'is.great',
+    'foo.bar': 'apple',
+    zest: 'drops',
+  }
+  const source = {
+    apple: { fest: 'fall' },
+    foo: { bar: 'boats' },
+    zest: 'sailing',
+  }
+  const res = {
+    is: { great: 'fall' },
+    apple: 'boats',
+    drops: 'sailing',
+  }
+  t.deepEqual(renamePick(renameObj, source), res)
   t.end()
 })

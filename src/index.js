@@ -1,10 +1,14 @@
 import {
   ary, cond, curry, defaultTo, eq, find, flip, flow, get,
   identical, identity, isEmpty, isFunction, isObject,
-  negate, partialRight, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
+  negate, nthArg, partialRight, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
+export function invokeArg(func) { return func() }
+export function invokeNthArg(index) {
+  return flow(nthArg(index), invokeArg)
+}
 export const condId = partialRight(cond, [ stubTrue, identity ])
 export const createObj = curry((key, val) => ({ [key]: val }))
 
@@ -58,10 +62,6 @@ export function move(getKey, setKey, object) {
   return object
 }
 export const fpMove = curry(ary(flip(move), 3))
-export const rename = curry((renameObj, source) =>
-  reduce(renameObj, fpMove, source)
-)
+export const rename = curry((renameObj, source) => reduce(renameObj, fpMove, source))
 // key is get, value is set.
-export const renamePick = curry((renameObj, source) =>
-  reduce(renameObj, fpCopy(source), {})
-)
+export const renamePick = curry((renameObj, source) => reduce(renameObj, fpCopy(source), {}))

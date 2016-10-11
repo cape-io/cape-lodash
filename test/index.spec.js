@@ -3,14 +3,20 @@ import { isFunction, min, noop } from 'lodash'
 
 import {
   createObj, changeChecker, copy, handleChanges, isFalse, move, toBool, getDefault, firstValArg,
-  rename, transformProp, transformPropOf, hasMethodAt, hasMethodOf, renamePick,
+  invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
+  rename, renamePick,
 } from '../src'
 
 test('createObj', (t) => {
   t.deepEqual(createObj('foo', 'bar'), { foo: 'bar' })
   t.end()
 })
-
+test('invokeArg', (t) => {
+  invokeArg(t.end)
+})
+test('invokeNthArg', (t) => {
+  invokeNthArg(1)(null, t.end)
+})
 test('isFalse', (t) => {
   t.ok(isFunction(isFalse), 'isFunc')
   t.false(isFalse(true), 'true is not false')

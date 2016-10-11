@@ -1,4 +1,4 @@
-# cape-lodash v1.2.1
+# cape-lodash v1.4.0
 
 A few `lodash/fp` inspired utility functions.
 
@@ -6,6 +6,8 @@ Please view source for explanation and tests for usage.
 
 - `condId` - array. [ stubTrue, identity ]
 - `createObj(key, value)` - curried. creates a new object with one key/val.
+- `invokeArg` invokes the first argument as a function.
+- `invokeNthArg` invokes the function at index.
 - `isFalse()` - Returns true if sent a value that is exactly false.
 - `isTrue()` - Returns true if sent a value that is exactly true.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.

@@ -1,12 +1,20 @@
 import test from 'tape'
 import { isFunction, min, noop } from 'lodash'
-
+import { eq, multiply } from 'lodash/fp'
 import {
-  createObj, changeChecker, copy, handleChanges, isFalse, move, toBool, getDefault, firstValArg,
+  createObj, changeChecker, condId, copy, handleChanges,
+  isFalse, move, toBool, getDefault, firstValArg,
   invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
   rename, renamePick,
 } from '../src'
 
+test('condId', (t) => {
+  const func = condId([ eq(2), multiply(2) ], [ eq(3), multiply(3) ])
+  t.equal(func(2), 4)
+  t.equal(func(3), 9)
+  t.equal(func(1), 1)
+  t.end()
+})
 test('createObj', (t) => {
   t.deepEqual(createObj('foo', 'bar'), { foo: 'bar' })
   t.end()

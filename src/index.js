@@ -1,7 +1,7 @@
 import {
-  ary, cond, curry, defaultTo, eq, find, flip, flow, get,
+  ary, concat, cond, curry, defaultTo, eq, find, flip, flow, get,
   identical, identity, isEmpty, isFunction, isObject,
-  negate, nthArg, partialRight, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
+  negate, nthArg, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
@@ -9,7 +9,10 @@ export function invokeArg(func) { return func() }
 export function invokeNthArg(index) {
   return flow(nthArg(index), invokeArg)
 }
-export const condId = partialRight(cond, [ stubTrue, identity ])
+export function condId(...conditions) {
+  const rules = concat(conditions, [ [ stubTrue, identity ] ])
+  return cond(rules)
+}
 export const createObj = curry((key, val) => ({ [key]: val }))
 
 // Returns true if sent a value that is exactly false.

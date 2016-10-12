@@ -1,10 +1,10 @@
-# cape-lodash v1.4.0
+# cape-lodash v1.4.1
 
 A few `lodash/fp` inspired utility functions.
 
 Please view source for explanation and tests for usage.
 
-- `condId` - array. [ stubTrue, identity ]
+- `condId` - each arg should be an array pair. `[ stubTrue, identity ]` is added as last option.
 - `createObj(key, value)` - curried. creates a new object with one key/val.
 - `invokeArg` invokes the first argument as a function.
 - `invokeNthArg` invokes the function at index.

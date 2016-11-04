@@ -1,4 +1,4 @@
-# cape-lodash v1.4.1
+# cape-lodash v1.5.0
 
 A few `lodash/fp` inspired utility functions.
 

@@ -1,10 +1,13 @@
 import {
   ary, concat, cond, curry, defaultTo, eq, find, flip, flow, get,
-  identical, identity, isEmpty, isFunction, isObject,
-  negate, nthArg, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
+  identical, identity, includes, isEmpty, isFunction, isObject,
+  negate, nthArg, partial, property, propertyOf, rearg, reduce, set, spread, stubTrue, unset,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
+export function callWith(...args) {
+  return func => func(...args)
+}
 export function invokeArg(func) { return func() }
 export function invokeNthArg(index) {
   return flow(nthArg(index), invokeArg)
@@ -54,6 +57,8 @@ export const transformPropOf = curry((transformer, object) => flow(propertyOf(ob
 // Check if property has a method at path. hasMethodAt(path)(object)
 export const hasMethodAt = transformProp(isFunction)
 export const hasMethodOf = transformPropOf(isFunction)
+
+export function oneOf(list) { return partial(includes, list) }
 
 export function copy(getKey, setKey, source, target) {
   return set(target, setKey, get(source, getKey))

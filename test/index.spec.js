@@ -5,7 +5,7 @@ import {
   createObj, changeChecker, condId, copy, handleChanges,
   isFalse, move, toBool, getDefault, firstValArg,
   invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
-  rename, renamePick,
+  oneOf, rename, renamePick,
 } from '../src'
 
 test('condId', (t) => {
@@ -132,6 +132,13 @@ test('move', (t) => {
   const res = move('one', 'two', obj)
   t.equal(res, obj)
   t.deepEqual(res, { two: 'a' })
+  t.end()
+})
+test('oneOf', (t) => {
+  const validOptions = oneOf([ 'a', 'b' ])
+  t.true(validOptions('a'))
+  t.true(validOptions('b'))
+  t.false(validOptions('c'))
   t.end()
 })
 test('rename', (t) => {

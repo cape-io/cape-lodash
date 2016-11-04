@@ -15,6 +15,7 @@ Please view source for explanation and tests for usage.
 - `changeChecker(initValue)` - Returns function that accepts new val and return true if changed.
 - `function handleChanges(getValue, onChange)` - Give it a getter and an onChange callback. It will return a function. Call returned function on every change and it will conditionally calling onChange when it finds a change.
 - `getDefault('path.one', 'second.path')` - Given two paths, select the first one that is defined.
+- `oneOf([ 'array', 'of', 'options' ])` - Returns func that will return true if array contains argument.
 - `transformProp(transformer, path)` - curried. Creates a function that returns transformation of object property at path.
 - `transformPropOf(transformer, object)` - curried. Same as `transformProp` but swap place of object/path.
 - `hasMethodAt(path)(object)` Returns function that evaluates if passed object has a function at path.

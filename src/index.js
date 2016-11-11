@@ -7,13 +7,9 @@ import at from 'lodash/fp/at'
 
 export function branch(bool, trueVal, falseVal) { return bool ? trueVal : falseVal }
 export const fpBranch = curry(rearg(branch, [ 1, 2, 0 ]), 3)
-export function callWith(...args) {
-  return func => func(...args)
-}
+export function callWith(...args) { return func => func(...args) }
 export function invokeArg(func) { return func() }
-export function invokeNthArg(index) {
-  return flow(nthArg(index), invokeArg)
-}
+export function invokeNthArg(index) { return flow(nthArg(index), invokeArg) }
 export function condId(...conditions) {
   const rules = concat(conditions, [ [ stubTrue, identity ] ])
   return cond(rules)

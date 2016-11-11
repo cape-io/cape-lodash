@@ -3,7 +3,8 @@
 A few `lodash/fp` inspired utility functions.
 
 Please view source for explanation and tests for usage.
-
+- `branch` - function version of `bool ? trueVal : falseVal`
+- `fbBranch` - Curried (trueVal, falseVal, bool).
 - `condId` - each arg should be an array pair. `[ stubTrue, identity ]` is added as last option.
 - `createObj(key, value)` - curried. creates a new object with one key/val.
 - `invokeArg` invokes the first argument as a function.
@@ -20,7 +21,7 @@ Please view source for explanation and tests for usage.
 - `transformPropOf(transformer, object)` - curried. Same as `transformProp` but swap place of object/path.
 - `hasMethodAt(path)(object)` Returns function that evaluates if passed object has a function at path.
 - `hasMethodOf(object)(path)` Same as `hasMethodAt` with object/path flip.
-- `copy(getKey, setKey, source, target)` - Value of getKey within source is added to target at setKey.
+- `copy(getKey, setKey, source, target)` - Value of getKey within source is added to target at setKey unless it is undefined.
 - `move(getKey, setKey, object)` Place value of getKey path within object to setKey path.
 - `rename(renameObj, source)` - renameObj = { getKey: 'setKey' }
 - `renamePick(renameObj, source)` - Like rename but creates a new objected limited to values of renameObj.

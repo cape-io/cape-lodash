@@ -121,10 +121,16 @@ test('hasMethodOf', (t) => {
 })
 test('copy', (t) => {
   const target = { foo: 'bar' }
-  const source = { cats: 'dogs' }
+  const source = { cats: 'dogs', fish: null }
   const res = copy('cats', 'usb.dongle', source, target)
   t.equal(res, target)
-  t.deepEqual(res, { foo: 'bar', usb: { dongle: 'dogs' } })
+  const expected = { foo: 'bar', usb: { dongle: 'dogs' } }
+  t.deepEqual(res, expected)
+  t.deepEqual(target, expected)
+  copy('bat', 'ball', source, target)
+  t.false(Object.hasOwnProperty.call(target, 'ball'))
+  copy('fish', 'fishs', source, target)
+  t.equal(target.fishs, null)
   t.end()
 })
 test('move', (t) => {

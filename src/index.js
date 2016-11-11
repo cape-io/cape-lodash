@@ -5,6 +5,8 @@ import {
 } from 'lodash'
 import at from 'lodash/fp/at'
 
+export function branch(bool, trueVal, falseVal) { return bool ? trueVal : falseVal }
+export const fpBranch = curry(rearg(branch, [ 1, 2, 0 ]), 3)
 export function callWith(...args) {
   return func => func(...args)
 }
@@ -61,7 +63,8 @@ export const hasMethodOf = transformPropOf(isFunction)
 export function oneOf(list) { return partial(includes, list) }
 
 export function copy(getKey, setKey, source, target) {
-  return set(target, setKey, get(source, getKey))
+  const value = get(source, getKey)
+  return (value === undefined) ? target : set(target, setKey, value)
 }
 export const fpCopy = curry(rearg(copy, [ 3, 2, 0, 1 ]), 4)
 export function move(getKey, setKey, object) {

@@ -1,10 +1,10 @@
 import test from 'tape'
-import { isFunction, min, noop } from 'lodash'
+import { constant, isFunction, isString, min, noop, toUpper } from 'lodash'
 import { eq, multiply } from 'lodash/fp'
 import {
   createObj, changeChecker, condId, copy, handleChanges,
   isFalse, move, toBool, getDefault, firstValArg,
-  invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
+  invokeArg, invokeNthArg, overBranch, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
   oneOf, rename, renamePick,
 } from '../src'
 
@@ -13,6 +13,15 @@ test('condId', (t) => {
   t.equal(func(2), 4)
   t.equal(func(3), 9)
   t.equal(func(1), 1)
+  t.end()
+})
+test('overBranch', (t) => {
+  const ob1 = overBranch(isString, toUpper)
+  t.equal(ob1('abc'), 'ABC')
+  t.equal(ob1(1), 1)
+  const ob2 = overBranch(isString, toUpper, constant('No'))
+  t.equal(ob2(1), 'No')
+  t.equal(ob2('fp'), 'FP')
   t.end()
 })
 test('createObj', (t) => {

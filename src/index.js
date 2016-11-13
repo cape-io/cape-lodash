@@ -14,6 +14,9 @@ export function condId(...conditions) {
   const rules = concat(conditions, [ [ stubTrue, identity ] ])
   return cond(rules)
 }
+export function overBranch(boolCheck, getTrue, getFalse = identity) {
+  return cond([ [ boolCheck, getTrue ], [ stubTrue, getFalse ] ])
+}
 export const createObj = curry((key, val) => ({ [key]: val }))
 
 // Returns true if sent a value that is exactly false.

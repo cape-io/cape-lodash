@@ -1,4 +1,4 @@
-# cape-lodash v1.5.0
+# cape-lodash v1.7.0
 
 A few `lodash/fp` inspired utility functions.
 
@@ -6,6 +6,7 @@ Please view source for explanation and tests for usage.
 - `branch` - function version of `bool ? trueVal : falseVal`
 - `fbBranch` - Curried (trueVal, falseVal, bool).
 - `condId` - each arg should be an array pair. `[ stubTrue, identity ]` is added as last option.
+- `overBranch(boolCheck, getTrue, getFalse)`
 - `createObj(key, value)` - curried. creates a new object with one key/val.
 - `invokeArg` invokes the first argument as a function.
 - `invokeNthArg` invokes the function at index.

@@ -13,7 +13,6 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "array-bracket-spacing": [ 2, "always" ],
     "comma-dangle": [2, "always-multiline"],
     "id-length": [2, {
       "min": 3,

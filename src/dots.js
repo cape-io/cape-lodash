@@ -4,7 +4,7 @@ export function copy(getKey, setKey, source, target) {
   const value = get(source, getKey)
   return (value === undefined) ? target : set(target, setKey, value)
 }
-export const fpCopy = curry(rearg(copy, [ 3, 2, 0, 1 ]), 4)
+export const fpCopy = curry(rearg(copy, [3, 2, 0, 1]), 4)
 export function move(getKey, setKey, object) {
   set(object, setKey, get(object, getKey))
   unset(object, getKey)

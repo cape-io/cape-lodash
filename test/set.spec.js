@@ -1,6 +1,6 @@
 import test from 'tape'
 import { has, isFunction, method } from 'lodash'
-import { setField, setFieldHas, setKey, setIn, transformProp } from '../src'
+import { setField, setFieldHas, setKey, setIn, setVal, transformProp } from '../src'
 import { collection } from './mock'
 
 test('setKey', (t) => {
@@ -49,5 +49,14 @@ test('setFieldHas', (t) => {
   const res2 = func(item2)
   t.ok(item2 === res2)
   t.false(has(item2.galleryHours))
+  t.end()
+})
+test('setVal', (t) => {
+  const res1 = setVal('value', {}, 'key')
+  t.deepEqual(res1, { key: 'value' })
+  const func = setVal('is the best')
+  t.ok(isFunction(func))
+  const res = func({}, 'kai')
+  t.equal(res.kai, 'is the best')
   t.end()
 })

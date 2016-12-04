@@ -1,6 +1,9 @@
 import test from 'tape'
 import { has, isFunction, method } from 'lodash'
-import { setField, setFieldHas, setKey, setIn, setVal, transformProp } from '../src'
+import { multiply } from 'lodash/fp'
+import {
+  replaceField, setField, setFieldHas, setKey, setKeyVal, setIn, setVal, transformProp,
+} from '../src'
 import { collection } from './mock'
 
 test('setKey', (t) => {
@@ -13,6 +16,12 @@ test('setKey', (t) => {
   const obj3 = setKey('bar', obj2, 'ice')
   t.false(obj3 === obj2)
   t.deepEqual(obj3, { foo: 'dog', bar: 'ice' })
+  t.end()
+})
+test('setKeyVal', (t) => {
+  const func = setKeyVal('kai', 'isNerd')
+  t.ok(isFunction(func))
+  t.equal(func({}).kai, 'isNerd')
   t.end()
 })
 test('setIn', (t) => {
@@ -49,6 +58,17 @@ test('setFieldHas', (t) => {
   const res2 = func(item2)
   t.ok(item2 === res2)
   t.false(has(item2.galleryHours))
+  t.end()
+})
+test('replaceField', (t) => {
+  const func = replaceField('profit', multiply(2))
+  const cat = { name: 'spike' }
+  const item = { cat, profit: 2 }
+  const res = func(item)
+  t.equal(res.cat, cat)
+  t.equal(res.profit, 4)
+  const func2 = replaceField('profits', multiply(20))
+  t.equal(func2(item), item)
   t.end()
 })
 test('setVal', (t) => {

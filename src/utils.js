@@ -1,7 +1,5 @@
 import {
-  cond, curry, defaultTo, find, flow,
-  identity, includes, isFunction,
-  nthArg, partial, property, propertyOf, spread, stubTrue,
+  cond, curry, defaultTo, find, flow, identity, includes, nthArg, partial, spread, stubTrue,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
@@ -22,13 +20,5 @@ export const firstValArg = flow(Array, find)
 export function getDefault(path1, path2) {
   return flow(at([path1, path2]), spread(defaultTo))
 }
-// Return result of calling checker with object property.
-export const transformProp = curry((transformer, path) => flow(property(path), transformer))
-export const doProp = transformProp
-export const transformPropOf = curry((transformer, object) => flow(propertyOf(object), transformer))
-
-// Check if property has a method at path. hasMethodAt(path)(object)
-export const hasMethodAt = transformProp(isFunction)
-export const hasMethodOf = transformPropOf(isFunction)
 
 export function oneOf(list) { return partial(includes, list) }

@@ -6,7 +6,7 @@ import { doProp } from './transform'
 export function set(state, key, value) { return { ...state, [key]: value } }
 // setKey(key, state, value)
 export const setKey = curry(rearg(set, [1, 0, 2]), 3)
-// setKeyVal(value, key, state)
+// setKeyVal(key, value, state)
 export const setKeyVal = curry(rearg(set, [2, 0, 1]), 3)
 // setVal(value, state, key)
 export const setVal = curry(rearg(set, [1, 2, 0]), 3)

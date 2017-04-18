@@ -1,5 +1,6 @@
 import {
-  cond, curry, defaultTo, find, flow, identity, includes, nthArg, partial, spread, stubTrue,
+  cond, curry, defaultTo, fill, find, flow,
+  identity, includes, nthArg, partial, spread, stubTrue, zipObject,
 } from 'lodash'
 import at from 'lodash/fp/at'
 
@@ -22,3 +23,8 @@ export function getDefault(path1, path2) {
 }
 
 export function oneOf(list) { return partial(includes, list) }
+
+export function arrayTrueObj(arr) {
+  if (!arr || !arr.length) return {}
+  return zipObject(arr, fill(Array(arr.length), true))
+}

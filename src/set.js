@@ -1,4 +1,4 @@
-import { curry, get, rearg } from 'lodash'
+import { curry, get, omit, rearg } from 'lodash'
 import { has } from 'lodash/fp'
 import { condId } from './cond'
 import { doProp } from './transform'
@@ -25,3 +25,7 @@ export const replaceField = curry((path, transformer) => condId([
 export const setWith = curry((fieldId, withId, transformer) =>
   setField(fieldId, doProp(transformer, withId))
 )
+export function delAt(path, state) {
+  const omitKey = path.pop()
+  return setIn(path, state, omit(get(state, path), omitKey))
+}

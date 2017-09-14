@@ -4,9 +4,6 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "ecmaFeatures": {
-    "modules": true
-  },
   "env": {
     "shared-node-browser": true,
     "es6": true

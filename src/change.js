@@ -9,7 +9,7 @@ export function changeChecker(initValue) {
     return !eq(previousValue, currentValue)
   }
 }
-// Give it a getter and an onChange callback. It will return a function.
+// Give it a getter func and an onChange callback. It will return a function.
 // Call returned func on every change and it will conditionally calling onChange.
 export function handleChanges(getValue, onChange) {
   const valueChanged = changeChecker(getValue())

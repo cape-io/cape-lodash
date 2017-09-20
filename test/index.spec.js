@@ -1,29 +1,13 @@
 import test from 'tape'
-import { constant, isFunction, isString, min, noop, toUpper } from 'lodash'
-import { eq, multiply } from 'lodash/fp'
+import { isFunction, min, noop } from 'lodash'
 import {
-  createObj, changeChecker, condId, copy, handleChanges,
+  createObj, changeChecker, copy, handleChanges,
   isFalse, move, toBool, getDefault, firstValArg,
-  invokeArg, invokeNthArg, overBranch, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
+  invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
   oneOf, rename, renamePick,
 } from '../src'
 
-test('condId', (t) => {
-  const func = condId([eq(2), multiply(2)], [eq(3), multiply(3)])
-  t.equal(func(2), 4)
-  t.equal(func(3), 9)
-  t.equal(func(1), 1)
-  t.end()
-})
-test('overBranch', (t) => {
-  const ob1 = overBranch(isString, toUpper)
-  t.equal(ob1('abc'), 'ABC')
-  t.equal(ob1(1), 1)
-  const ob2 = overBranch(isString, toUpper, constant('No'))
-  t.equal(ob2(1), 'No')
-  t.equal(ob2('fp'), 'FP')
-  t.end()
-})
+
 test('createObj', (t) => {
   t.deepEqual(createObj('foo', 'bar'), { foo: 'bar' })
   t.end()
@@ -55,7 +39,7 @@ test('toBool', (t) => {
   t.false(toBool({}), 'empty obj')
   t.true(toBool({ foo: 'far' }), 'obj')
   t.false(toBool([]), 'empty arr')
-  t.true(toBool([ 1 ]), 'arr')
+  t.true(toBool([1]), 'arr')
   t.false(toBool(null), 'null')
   t.false(toBool(undefined), 'und')
   t.false(toBool(''), 'empty str')
@@ -110,12 +94,12 @@ test('getDefault', (t) => {
 })
 test('transformProp', (t) => {
   t.equal(transformProp(isFunction, 'foo')({ foo: noop }), true, 'isFunc')
-  t.equal(transformProp(min)('foo')({ foo: [ 4, 2, 8, 6 ] }), 2, 'min')
+  t.equal(transformProp(min)('foo')({ foo: [4, 2, 8, 6] }), 2, 'min')
   t.end()
 })
 test('transformPropOf', (t) => {
   t.equal(transformPropOf(isFunction, { foo: noop })('foo'), true, 'isFunc')
-  t.equal(transformPropOf(min)({ foo: [ 4, 2, 8, 6 ] })('foo'), 2, 'min')
+  t.equal(transformPropOf(min)({ foo: [4, 2, 8, 6] })('foo'), 2, 'min')
   t.end()
 })
 test('hasMethodAt', (t) => {
@@ -150,7 +134,7 @@ test('move', (t) => {
   t.end()
 })
 test('oneOf', (t) => {
-  const validOptions = oneOf([ 'a', 'b' ])
+  const validOptions = oneOf(['a', 'b'])
   t.true(validOptions('a'))
   t.true(validOptions('b'))
   t.false(validOptions('c'))

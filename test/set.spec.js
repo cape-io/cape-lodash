@@ -2,9 +2,10 @@ import test from 'tape'
 import { has, isFunction, method } from 'lodash'
 import { multiply } from 'lodash/fp'
 import {
-  replaceField, set, setField, setFieldHas, setKey, setKeyVal, setSimple, setVal, transformProp,
+  delAt, replaceField, set, setField, setFieldHas, setKey,
+  setKeyVal, setSimple, setVal, transformProp,
 } from '../src'
-import { collection } from './mock'
+import { collection, user } from './mock'
 
 test('setSimple', (t) => {
   const obj = { foo: 'cat' }
@@ -88,5 +89,28 @@ test('setVal', (t) => {
   t.ok(isFunction(func))
   const res = func({}, 'kai')
   t.equal(res.kai, 'is the best')
+  t.end()
+})
+test('delAt', (t) => {
+  const expectedRes1 = {
+    type: 'Person',
+    id: 'anon',
+    name: 'foo',
+  }
+  t.deepEqual(delAt('gender', user), expectedRes1)
+  t.deepEqual(delAt(['gender'], user), expectedRes1)
+  const expectedRes2 = {
+    type: 'Person',
+    id: 'anon',
+    gender: 'bar',
+  }
+  t.deepEqual(delAt('name', user), expectedRes2)
+  const res3 = delAt(['a1.creator.auth.name'], collection)
+  const expectedRes3 = {
+    type: 'Person',
+    id: 'auth',
+  }
+  t.deepEqual(res3.a1.creator.auth, expectedRes3)
+  // console.log(res3)
   t.end()
 })

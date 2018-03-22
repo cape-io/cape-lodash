@@ -1,6 +1,6 @@
 {
   "name": "cape-lodash",
-  "version": "1.13.1",
+  "version": "1.13.2",
   "description": "A few lodash/fp inspired helper utility functions.",
   "main": "lib/index.js",
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

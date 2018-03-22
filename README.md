@@ -1,4 +1,4 @@
-# cape-lodash v1.7.0
+# cape-lodash v1.13.2
 
 A few `lodash/fp` inspired utility functions.
 
@@ -7,7 +7,7 @@ A few `lodash/fp` inspired utility functions.
 - `isFalse()` - Returns true if sent a value that is exactly false.
 - `isTrue()` - Returns true if sent a value that is exactly true.
 - `hasSize()` - Opposite of `isEmpty`.
-- `toBool({})` - Turn empty objects and arrays to false. Turn other values into a boolean.
+- `toBool({})` - Turn empty objects and arrays to false. Coerce other values into a boolean.
 
 ## Changes
 
@@ -45,7 +45,6 @@ When you want to edit a property and return a new object instead of mutating.
 - `setFieldHas(path, transformer)(item)` - Only updates if item has path.
 - `replaceField(path, transformer)(item)` - The `transformer` gets the value of path. Must return new value that will set to path.
 - `setWith(fieldId, withId, transformer)` - The `transformer` gets the value of `withId`. Must return new value that will set to `fieldId`.
-- `delAt(path, state)` - Will remove value at path from state.
 
 ## Transform
 

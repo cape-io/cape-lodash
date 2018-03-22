@@ -1,5 +1,5 @@
-import { curry, get, omit, rearg, toPath } from 'lodash'
-import { has } from 'lodash/fp'
+import { curry, get, rearg, toPath } from 'lodash'
+import { has, omit } from 'lodash/fp'
 import { condId } from './cond'
 import { doProp } from './transform'
 
@@ -27,7 +27,14 @@ export const replaceField = curry((path, transformer) => condId([
 export const setWith = curry((fieldId, withId, transformer) =>
   setField(fieldId, doProp(transformer, withId))
 )
-export const delAt = curry((path, state) => {
-  const omitKey = toPath(path).pop()
-  return setKey(path, state, omit(get(state, path), omitKey))
-})
+
+// Allow accepting single path depth.
+export const delAt = omit
+// curry((path, state) => {
+//   const fullPath = toPath(path)
+//   const omitKey = fullPath.pop()
+//   const nestedValue = isEmpty(fullPath) ?
+//   console.log(fullPath)
+//   console.log(omitKey)
+//   return setKey(fullPath, state, omit(get(state, fullPath), omitKey))
+// })

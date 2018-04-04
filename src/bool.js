@@ -1,5 +1,4 @@
-import { cond, isEmpty, isObject, negate, stubTrue } from 'lodash'
-import { identical } from 'lodash/fp'
+import { cond, identical, isEmpty, isObject, negate, stubTrue } from 'lodash/fp'
 
 // Returns true if sent a value that is exactly false.
 export const isFalse = identical(false)

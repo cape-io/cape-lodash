@@ -1,8 +1,8 @@
 import test from 'tape'
-import { isFunction, min, noop } from 'lodash'
+import { includes, isFunction, min, noop } from 'lodash/fp'
 import {
   createObj, changeChecker, copy, handleChanges,
-  isFalse, move, toBool, getDefault, firstValArg,
+  move, getDefault, firstValArg,
   invokeArg, invokeNthArg, transformProp, transformPropOf, hasMethodAt, hasMethodOf,
   oneOf, rename, renamePick,
 } from '../src'
@@ -18,33 +18,12 @@ test('invokeArg', (t) => {
 test('invokeNthArg', (t) => {
   invokeNthArg(1)(null, t.end)
 })
-test('isFalse', (t) => {
-  t.ok(isFunction(isFalse), 'isFunc')
-  t.false(isFalse(true), 'true is not false')
-  t.false(isFalse(null), 'null is not false')
-  t.true(isFalse(false), 'false is false')
-  t.end()
-})
 
 test('firstValArg', (t) => {
   t.ok(isFunction(firstValArg), 'isFunc')
   t.equal(firstValArg(1, 0, 2), 1, 'arg0')
   t.equal(firstValArg(0, 0, 2), 2, 'arg2')
   t.equal(firstValArg(undefined, null, '', 'hot'), 'hot', 'arg3')
-  t.end()
-})
-
-test('toBool', (t) => {
-  t.ok(isFunction(toBool), 'isFunc')
-  t.false(toBool({}), 'empty obj')
-  t.true(toBool({ foo: 'far' }), 'obj')
-  t.false(toBool([]), 'empty arr')
-  t.true(toBool([1]), 'arr')
-  t.false(toBool(null), 'null')
-  t.false(toBool(undefined), 'und')
-  t.false(toBool(''), 'empty str')
-  t.true(toBool('kai'), 'string')
-  t.true(toBool(1), 'num')
   t.end()
 })
 
@@ -88,8 +67,8 @@ const props = {
   title: 'strawberry',
 }
 test('getDefault', (t) => {
-  t.equal(getDefault('item.id', 'title')(props), 'bar', 'item.id')
-  t.equal(getDefault('item.nothing', 'title')(props), 'strawberry', 'title')
+  t.equal(getDefault('title', 'item.id')(props), 'bar', 'item.id')
+  t.equal(getDefault('title', 'item.nothing')(props), 'strawberry', 'title')
   t.end()
 })
 test('transformProp', (t) => {
@@ -135,9 +114,9 @@ test('move', (t) => {
 })
 test('oneOf', (t) => {
   const validOptions = oneOf(['a', 'b'])
-  t.true(validOptions('a'))
-  t.true(validOptions('b'))
-  t.false(validOptions('c'))
+  t.true(validOptions('a'), 'a')
+  t.true(validOptions('b'), 'b')
+  t.false(validOptions('c'), 'c')
   t.end()
 })
 test('rename', (t) => {

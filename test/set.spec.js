@@ -1,34 +1,33 @@
 import test from 'tape'
 import { has, isFunction, method } from 'lodash'
-import { multiply } from 'lodash/fp'
+import { multiply, set, omit } from 'lodash/fp'
 import {
-  delAt, replaceField, set, setField, setFieldHas, setKey,
-  setKeyVal, setSimple, setVal, transformProp,
+  replaceField, setField, setFieldHas, setKey,
+  setSimple, setVal, transformProp,
 } from '../src'
 import { collection, user } from './mock'
 
-test('setSimple', (t) => {
+test('set', (t) => {
+  const res1 = set(['a1', 'title'], 'apples', collection)
+  t.false(collection === res1)
+  t.false(collection.a1 === res1.a1, 'a1')
+  const func = set('kai', 'isNerd')
+  t.ok(isFunction(func))
+  t.equal(func({}).kai, 'isNerd')
   const obj = { foo: 'cat' }
-  const obj2 = setSimple(obj, 'bar', 'dog')
+  const obj2 = set('bar', 'dog', obj)
   t.false(obj2 === obj)
   t.equal(obj2.foo, 'cat')
   t.equal(obj2.bar, 'dog')
-  t.end()
-})
-test('set', (t) => {
-  const updateTitle = set(collection)
-  const res1 = updateTitle(['a1', 'title'], 'apples')
-  t.false(collection === res1)
-  t.false(collection.a1 === res1.a1, 'a1')
   // console.log(res1)
   t.equal(res1.a1.title, 'apples', 'title')
   t.equal(collection.a1.creator, res1.a1.creator, 'a1 creator')
   t.equal(collection.a2, res1.a2, 'a2')
   t.equal(collection.a3, res1.a3, 'a3')
-  const res2 = set(collection, ['a3', 'creator', 'anon', 'name'], 'drone')
+  const res2 = set(['a3', 'creator', 'anon', 'name'], 'drone', collection)
   t.equal(collection.a1.creator.anon, res2.a1.creator.anon)
   t.equal(res2.a3.creator.anon.name, 'drone')
-  const res3 = set({}, 'foo.bar.song', 'valueThingy')
+  const res3 = set('foo.bar.song', 'valueThingy', {})
   t.equal(res3.foo.bar.song, 'valueThingy', 'set in empty obj')
   t.end()
 })
@@ -45,12 +44,7 @@ test('setKey', (t) => {
   t.deepEqual(obj3, { foo: 'dog', bar: 'ice' })
   t.end()
 })
-test('setKeyVal', (t) => {
-  const func = setKeyVal('kai', 'isNerd')
-  t.ok(isFunction(func))
-  t.equal(func({}).kai, 'isNerd')
-  t.end()
-})
+
 test('setField', (t) => {
   const func = setField('galleryHours', transformProp(method('join', ', '), 'galleryHours'))
   const item = { galleryHours: ['foo', 'bar'] }
@@ -69,6 +63,14 @@ test('setFieldHas', (t) => {
   const res2 = func(item2)
   t.ok(item2 === res2)
   t.false(has(item2.galleryHours))
+  t.end()
+})
+test('setSimple', (t) => {
+  const obj = { foo: 'cat' }
+  const obj2 = setSimple(obj, 'bar', 'dog')
+  t.false(obj2 === obj)
+  t.equal(obj2.foo, 'cat')
+  t.equal(obj2.bar, 'dog')
   t.end()
 })
 test('replaceField', (t) => {
@@ -91,21 +93,21 @@ test('setVal', (t) => {
   t.equal(res.kai, 'is the best')
   t.end()
 })
-test('delAt', (t) => {
+test('omit', (t) => {
   const expectedRes1 = {
     type: 'Person',
     id: 'anon',
     name: 'foo',
   }
-  t.deepEqual(delAt('gender', user), expectedRes1)
-  t.deepEqual(delAt(['gender'], user), expectedRes1)
+  t.deepEqual(omit('gender', user), expectedRes1)
+  t.deepEqual(omit(['gender'], user), expectedRes1)
   const expectedRes2 = {
     type: 'Person',
     id: 'anon',
     gender: 'bar',
   }
-  t.deepEqual(delAt('name', user), expectedRes2)
-  const res3 = delAt(['a1.creator.auth.name'], collection)
+  t.deepEqual(omit('name', user), expectedRes2)
+  const res3 = omit(['a1.creator.auth.name'], collection)
   const expectedRes3 = {
     type: 'Person',
     id: 'auth',

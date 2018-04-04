@@ -1,4 +1,4 @@
-import { eq } from 'lodash'
+import { eq } from 'lodash/fp'
 
 // Give it an initial value. Returns function that will be true when value changed.
 export function changeChecker(initValue) {

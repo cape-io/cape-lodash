@@ -1,11 +1,13 @@
-# cape-lodash v1.13.2
+# cape-lodash v2.0.0
 
-A few `lodash/fp` inspired utility functions.
+A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
+
+Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-lodash-fp) by extending eslint with `plugin:lodash-fp/recommended` and including the `lodash-fp` plugin.
 
 ## Bool
 
-- `isFalse()` - Returns true if sent a value that is exactly false.
-- `isTrue()` - Returns true if sent a value that is exactly true.
+- `isFalse()` - Returns true if sent a value that is exactly `false`.
+- `isTrue()` - Returns true if sent a value that is exactly `true`.
 - `hasSize()` - Opposite of `isEmpty`.
 - `toBool({})` - Turn empty objects and arrays to false. Coerce other values into a boolean.
 
@@ -36,8 +38,7 @@ A few `lodash/fp` inspired utility functions.
 
 When you want to edit a property and return a new object instead of mutating.
 
-- `setSimple(state, key, value)` - Spread object and set new property onto object. The only one that doesn't have `curry` applied to it.
-- `set(state, path, value)` - Similar to `setSimple` but allows for string or array paths for nested objects.
+- `setSimple(state, key, value)` - `_fp.set` with normal argument order.
 - `setKey(path, state, value)` - `set` but with different arg order.
 - `setKeyVal(key, value, state)` - `set` but with different arg order.
 - `setVal(value, state, key)`
@@ -61,5 +62,5 @@ Please view source for explanation and tests for usage.
 - `invokeArg` invokes the first argument as a function.
 - `invokeNthArg` invokes the function at index.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
-- `getDefault('path.one', 'second.path')` - Given two paths, select the first one that is defined.
+- `getDefault('default.path', 'check.path.first')` - Select two paths, send to `_fp.defaultTo`. Default path first.
 - `oneOf([ 'array', 'of', 'options' ])` - Returns func that will return true if array contains argument.

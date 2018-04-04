@@ -1,24 +1,23 @@
 import {
-  curry, defaultTo, fill, find, flow,
-  includes, nthArg, partial, spread, zipObject,
-} from 'lodash'
-import at from 'lodash/fp/at'
+  at, curry, defaultTo, fill, find, flow, identity, includes, isPlainObject,
+  nthArg, spread, zipObject } from 'lodash/fp'
 
 export const createObj = curry((key, val) => ({ [key]: val }))
+export const ensureObj = item => (isPlainObject(item) ? item : {})
 
 export function callWith(...args) { return func => func(...args) }
 export function invokeArg(func) { return func() }
 export function invokeNthArg(index) { return flow(nthArg(index), invokeArg) }
 
 // Find the first truthy argument value, .
-export const firstValArg = flow(Array, find)
+export const firstValArg = flow(Array, find(identity))
 
 // Given two paths, select the first one that is defined.
-export function getDefault(path1, path2) {
-  return flow(at([path1, path2]), spread(defaultTo))
+export function getDefault(defaultPath, getPath) {
+  return flow(at([defaultPath, getPath]), spread(defaultTo))
 }
 
-export function oneOf(list) { return partial(includes, list) }
+export const oneOf = includes.convert({ rearg: false })
 
 export function arrayTrueObj(arr) {
   if (!arr || !arr.length) return {}

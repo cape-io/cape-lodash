@@ -1,4 +1,4 @@
-# cape-lodash v2.0.0
+# cape-lodash v2.1.0
 
 A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 
@@ -9,7 +9,8 @@ Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-
 - `isFalse()` - Returns true if sent a value that is exactly `false`.
 - `isTrue()` - Returns true if sent a value that is exactly `true`.
 - `hasSize()` - Opposite of `isEmpty`.
-- `toBool({})` - Turn empty objects and arrays to false. Coerce other values into a boolean.
+- `parseBoolean()` - Takes a string and returns false unless word is in word list webmasterkai/affirmative
+- `toBool({})` - Turn empty objects and arrays to false. Sends strings to `parseBoolean`. Coerce other values into a boolean.
 
 ## Changes
 

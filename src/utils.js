@@ -23,3 +23,8 @@ export function arrayTrueObj(arr) {
   if (!arr || !arr.length) return {}
   return zipObject(arr, fill(Array(arr.length), true))
 }
+
+export function romanize(str) {
+  const lookFor = /\b([MDCLXVI]+)\b/ig
+  return str.replace(lookFor, (value) => value.toUpperCase())
+}

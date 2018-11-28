@@ -1,5 +1,6 @@
 export * from './bool'
 export * from './change'
+export * from './clean'
 export * from './cond'
 export * from './dots'
 export * from './merge'

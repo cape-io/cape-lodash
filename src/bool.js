@@ -20,7 +20,7 @@ export const isGlib = overSome([
 
 export const hasSize = negate(isEmpty)
 
-const parseBoolean = flow(trim, lowerCase, oneOf(trueWords))
+export const parseBoolean = flow(trim, lowerCase, oneOf(trueWords))
 // Turn empty objs and arrays to false. Turn other vals into a boolean.
 export const toBool = cond([
   [isObject, hasSize],

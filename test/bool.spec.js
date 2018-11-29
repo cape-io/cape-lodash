@@ -1,4 +1,3 @@
-import { constant, eq, isString, multiply, toUpper } from 'lodash/fp'
 import test from 'tape'
 import { isFalse, toBool } from '../src/bool'
 

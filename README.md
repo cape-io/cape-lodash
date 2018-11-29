@@ -1,4 +1,4 @@
-# cape-lodash v2.1.0
+# cape-lodash v2.2.0
 
 A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 
@@ -29,7 +29,9 @@ Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-
 - `copy(getKey, setKey, source, target)` - Value of getKey within source is added to target at setKey unless it is undefined.
 - `move(getKey, setKey, object)` Place value of getKey path within object to setKey path.
 - `rename(renameObj, source)` - renameObj = { getKey: 'setKey' }
-- `renamePick(renameObj, source)` - Like rename but creates a new objected limited to values of renameObj.
+- `renamePick(renameObj, source)` - Like `rename` but creates a new objected limited to values of renameObj.
+- `renameValues(renameObj)(strArray)` - renameObj = { find: 'replace' } Similar to `rename` but find/replace strings in array.
+- `createIndex('id', 'value')(dataArray)` - Creates a key/value index from an array of items. It's like `_.indexBy` but uses the field value of `value` property instead of the entire item.
 
 ## Merge
 

@@ -1,4 +1,7 @@
-import { ary, at, curry, flip, flow, fromPairs, get, map, pick, rearg, reduce, set, unset } from 'lodash'
+import {
+  ary, curry, flip, fromPairs, get,
+  pick, rearg, reduce, set, unset } from 'lodash'
+import { at, find, flow, identity, map, over, propertyOf } from 'lodash/fp'
 
 export function copy(getKey, setKey, source, target) {
   const value = get(source, getKey)
@@ -16,4 +19,11 @@ export const rename = curry((renameObj, source) => reduce(renameObj, fpMove, sou
 export const renamePick = curry((renameObj, source) => reduce(renameObj, fpCopy(source), {}))
 export const pickRename = curry((pickIds, renameObj, source) =>
   reduce(renameObj, fpCopy(source), pick(source)))
-export const createIndex = (keyPath, valuePath) => flow(map(at([keyPath, valuePath])), fromPairs)
+
+export const createIndex = (keyPath, valuePath) =>
+  flow(map(at([keyPath, valuePath])), fromPairs)
+
+export const propertyOfOr = renameObj =>
+  flow(over([propertyOf(renameObj), identity]), find(identity))
+
+export const renameValues = flow(propertyOfOr, map)

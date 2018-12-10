@@ -15,18 +15,23 @@ export const setVal = curry(rearg(set, [2, 0, 1]), 3)
 // setSimple(state, path, value)
 export const setSimple = set.convert({ rearg: false })
 
-export const setField = curry((path, transformer, item) => set(path, transformer(item), item))
-export const ensureField = (fieldId, transformer) =>
-  item => (has(fieldId, item) ? item : transformer(item))
+export const setField = curry((path, transformer, item) =>
+  set(path, transformer(item), item))
 
+// Create field if missing.
+export const ensureField = (path, transformer) =>
+  item => (has(path, item) ? item : transformer(item))
+
+// Replace Field. Transformer gets full item.
 export const setFieldHas = curry((path, transformer) => condId([
   has(path), setField(path, transformer),
 ]))
+// Replace Field. Transformer gets field value.
 export const replaceField = curry((path, transformer) => condId([
   has(path), setField(path, doProp(transformer, path)),
 ]))
-export const setWith = curry((fieldId, withId, transformer) =>
-  setField(fieldId, doProp(transformer, withId))
+export const setWith = curry((path, withId, transformer) =>
+  setField(path, doProp(transformer, withId))
 )
 export const mergeFields = curry((transformer, item) =>
   ({ ...item, ...transformer(item) }))

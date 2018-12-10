@@ -1,6 +1,7 @@
 import {
-  at, curry, defaultTo, fill, find, flow, identity, includes, isPlainObject,
-  nthArg, spread, zipObject } from 'lodash/fp'
+  at, curry, defaultTo, fill, find, flow, gt, has,
+  identity, includes, isPlainObject, lt, nthArg, spread, zipObject,
+} from 'lodash/fp'
 
 export const createObj = curry((key, val) => ({ [key]: val }))
 export const ensureObj = item => (isPlainObject(item) ? item : {})
@@ -18,6 +19,9 @@ export function getDefault(defaultPath, getPath) {
 }
 
 export const oneOf = includes.convert({ rearg: false })
+export const isGt = lt
+export const isLt = gt
+export const hasOf = has.convert({ rearg: false })
 
 export function arrayTrueObj(arr) {
   if (!arr || !arr.length) return {}

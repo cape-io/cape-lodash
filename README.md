@@ -1,4 +1,4 @@
-# cape-lodash v2.2.0
+# cape-lodash v2.2.2
 
 A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 
@@ -31,7 +31,7 @@ Install [ESLint rules for lodash/fp](https://github.com/jfmengels/eslint-plugin-
 - `rename(renameObj, source)` - renameObj = { getKey: 'setKey' }
 - `renamePick(renameObj, source)` - Like `rename` but creates a new objected limited to values of renameObj.
 - `renameValues(renameObj)(strArray)` - renameObj = { find: 'replace' } Similar to `rename` but find/replace strings in array.
-- `createIndex('id', 'value')(dataArray)` - Creates a key/value index from an array of items. It's like `_.indexBy` but uses the field value of `value` property instead of the entire item.
+- `keyWithField('id', 'value')(dataArray)` - Creates a key/value index from an array of items. It's like `_.keyBy` but uses the field value of `value` property instead of the entire item.
 
 ## Merge
 
@@ -46,8 +46,8 @@ When you want to edit a property and return a new object instead of mutating.
 - `setKeyVal(key, value, state)` - `set` but with different arg order.
 - `setVal(value, state, key)`
 - `setField(path, transformer)(item)` - The `transformer` function accepts item and should return the new value of `path`.
-- `setFieldHas(path, transformer)(item)` - Only updates if item has path.
-- `replaceField(path, transformer)(item)` - The `transformer` gets the value of path. Must return new value that will set to path.
+- `setFieldHas(path, transformer)(item)` - Only updates if item has path. Transformer is sent entire item.
+- `replaceField(path, transformer)(item)` - Similar to `setFieldHas`. The `transformer` gets the value of path. Transformer must return new value that will set to path.
 - `setWith(fieldId, withId, transformer)` - The `transformer` gets the value of `withId`. Must return new value that will set to `fieldId`.
 
 ## Transform
@@ -67,3 +67,6 @@ Please view source for explanation and tests for usage.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
 - `getDefault('default.path', 'check.path.first')` - Select two paths, send to `_fp.defaultTo`. Default path first.
 - `oneOf([ 'array', 'of', 'options' ])` - Returns func that will return true if array contains argument.
+- `isLt`
+- `isGt`
+- `hasOf`

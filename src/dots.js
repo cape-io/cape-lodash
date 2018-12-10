@@ -22,6 +22,7 @@ export const pickRename = curry((pickIds, renameObj, source) =>
 
 export const createIndex = (keyPath, valuePath) =>
   flow(map(at([keyPath, valuePath])), fromPairs)
+export const keyWithField = createIndex
 
 export const propertyOfOr = renameObj =>
   flow(over([propertyOf(renameObj), identity]), find(identity))

@@ -1,5 +1,5 @@
 import test from 'tape'
-import { includes, isFunction, min, noop } from 'lodash/fp'
+import { isFunction, min, noop } from 'lodash/fp'
 import {
   createObj, changeChecker, copy, handleChanges,
   move, getDefault, firstValArg,

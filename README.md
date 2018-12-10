@@ -1,4 +1,4 @@
-# cape-lodash v2.2.2
+# cape-lodash v2.3.0
 
 A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 
@@ -67,6 +67,7 @@ Please view source for explanation and tests for usage.
 - `firstValArg(0, '', 'foo')` - Find the first truthy argument value.
 - `getDefault('default.path', 'check.path.first')` - Select two paths, send to `_fp.defaultTo`. Default path first.
 - `oneOf([ 'array', 'of', 'options' ])` - Returns func that will return true if array contains argument.
-- `isLt`
-- `isGt`
-- `hasOf`
+- `divideBy` divideBy(2)(4) = 2
+- `isLt` isLt(4)(2) = true
+- `isGt` isGt(2)(3) = true
+- `hasOf` hasOf({foo: true, bar: false})('foo') = true

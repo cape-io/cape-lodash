@@ -1,13 +1,13 @@
 import {
   ary, curry, flip, fromPairs, get,
-  pick, rearg, reduce, set, unset } from 'lodash'
-import { at, find, flow, identity, map, over, propertyOf } from 'lodash/fp'
+  pick, reduce, set, unset } from 'lodash'
+import { at, curryN, find, flow, identity, map, over, propertyOf, rearg, result } from 'lodash/fp'
 
 export function copy(getKey, setKey, source, target) {
   const value = get(source, getKey)
   return (value === undefined) ? target : set(target, setKey, value)
 }
-export const fpCopy = curry(rearg(copy, [3, 2, 0, 1]), 4)
+export const fpCopy = curry(rearg([3, 2, 0, 1], copy), 4)
 export const move = curry((getKey, setKey, object) => {
   set(object, setKey, get(object, getKey))
   unset(object, getKey)
@@ -28,3 +28,18 @@ export const propertyOfOr = renameObj =>
   flow(over([propertyOf(renameObj), identity]), find(identity))
 
 export const renameValues = flow(propertyOfOr, map)
+
+// Set field with result of path on source to the same path on destination.
+export const setResult = curry((path, source, destination) =>
+  set(path, result(path, source), destination))
+
+// setValResult(source, destination, path)
+// Used as reducer iteratee for pickResult().
+export const setValResult = curryN(3, rearg([2, 0, 1], setResult))
+
+// Add results to a new object. How different from _.pick?
+export const pickResult = curry((ids, source) => reduce(ids, setValResult(source), {}))
+
+// Add results to destination object.
+export const pickResultDestination = curry((ids, destination, source) =>
+  reduce(ids, setValResult(source), destination))

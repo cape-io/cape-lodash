@@ -1,4 +1,4 @@
-# cape-lodash v2.3.0
+# cape-lodash v2.4.0
 
 A few [lodash](https://lodash.com/docs) inspired utility functions. For best results learn about `_.flow()` and read the [Lodash FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide).
 

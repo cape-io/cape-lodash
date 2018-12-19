@@ -1,13 +1,13 @@
 import {
   at, curry, defaultTo, divide, fill, find, flow, gt, has,
-  identity, includes, isPlainObject, lt, nthArg, spread, zipObject,
+  identity, includes, isFunction, isPlainObject, lt, nthArg, spread, zipObject,
 } from 'lodash/fp'
 
 export const createObj = curry((key, val) => ({ [key]: val }))
 export const ensureObj = item => (isPlainObject(item) ? item : {})
 
 export function callWith(...args) { return func => func(...args) }
-export function invokeArg(func) { return func() }
+export function invokeArg(func) { return isFunction(func) ? func() : func }
 export function invokeNthArg(index) { return flow(nthArg(index), invokeArg) }
 
 // Find the first truthy argument value, .
@@ -33,3 +33,7 @@ export function romanize(str) {
   const lookFor = /\b([MDCLXVI]+)\b/ig
   return str.replace(lookFor, value => value.toUpperCase())
 }
+
+// same as flow but always returns a promise
+export const flowP = (...fns) => start =>
+  fns.reduce(async (state, func) => await func(state), start) // eslint-disable-line no-return-await

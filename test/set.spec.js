@@ -46,11 +46,11 @@ test('setKey', (t) => {
 })
 
 test('setField', (t) => {
-  const func = setField('galleryHours', transformProp(method('join', ', '), 'galleryHours'))
-  const item = { galleryHours: ['foo', 'bar'] }
+  const func = setField('showings', transformProp(method('join', ', '), 'galleryHours'))
+  const item = { galleryHours: ['10am', '1pm'] }
   const res = func(item)
   t.false(item === res)
-  t.equal(res.galleryHours, 'foo, bar')
+  t.equal(res.showings, '10am, 1pm')
   t.end()
 })
 test('setFieldHas', (t) => {
